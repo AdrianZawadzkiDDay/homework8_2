@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Note</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+</head>
+<body>
+
+<h1>Notes</h1>
+<p>This is note api which uses thymeleaf and hibernete connecting with MySQL database.</p>
+
+<div >
+    <form class="pure-form" th:each="note: ${notes} " th:object="${modNote}" th:action="@{/notes/modification/{id}(id=${note.getId()})}" method="get" >
+
+        <fieldset class="pure-group" >
+            ID:    <a name="id" th:text="${note.getId()}" ></a><br>
+            Title:  <textarea class="pure-input-1" name="title" th:text="${note.getTitle()}" ></textarea>
+            Content:  <textarea class="pure-input-1" name="content" th:text="${note.getContent()}" ></textarea>
+            <button type="submit" class="pure-button pure-input-1-5 pure-button-primary">Update</button>
+            <a class="pure-button pure-button-primary"
+                   th:href="@{/notes/delete/{id}(id=${note.getId()})}">Delete</a>
+            <br><br><br>
+        </fieldset>
+
+    </form>
+
+    <br><br><br><br>
+
+    <a class="pure-button pure-button-active" href="/notes/addnote">Add new Note </a>
+
+    <br><br><br><br>
+
+
+</div>
+
+</body>
+</html>
